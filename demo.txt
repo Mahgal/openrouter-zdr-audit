@@ -1,0 +1,30 @@
+OpenRouter ZDR audit — demo log examples/sample-log.jsonl
+req-1 | minimax/minimax-m2 | novita | 2026-10-05 | EXPOSED
+  Novita: MiniMax requests forwarded to MiniMax official API (2026-05-28..2026-11-11)
+req-2 | deepseek/deepseek-v4-flash-0731 | phala | 2026-10-22 | EXPOSED
+  Phala: DeepSeek V4 Flash 0731 requests, attacker-held inference server (2026-10-21..2026-11-08)
+req-3 | z-ai/glm-5.2 | together | 2026-07-04 | EXPOSED
+  Together AI: stored prompt samples downloaded by an unauthorized party (2026-06-01..2026-07-31)
+req-4 | moonshotai/kimi-k2.6 | together | 2026-06-24 | EXPOSED
+  Together AI: stored prompt samples downloaded by an unauthorized party (2026-06-01..2026-07-31)
+req-5 | minimax/minimax-m2 | novita | 2026-11-15 | AT_RISK
+  provider novita published an incident notice; this request is outside the published windows, but the same provider/model family was affected
+req-6 | minimax/minimax-m2 | novita | 2026-05-27 | AT_RISK
+  provider novita published an incident notice; this request is outside the published windows, but the same provider/model family was affected
+req-7 | openai/gpt-6.2-sol | openai | 2026-11-20 | CLEAR
+  outside all published incident windows
+req-8 | minimax/minimax-m2 | fireworks | 2026-05-27 | CLEAR
+  outside all published incident windows
+req-9 | google/gemini-4-neon | google | 2026-11-22 | UNKNOWN_ZDR
+  sent on/after 2026-11-22, when 125 endpoints lost ZDR eligibility and OpenRouter has not published the list; verify this endpoint in your OpenRouter dashboard
+line 10 | None | None | None | SKIPPED
+  not valid JSON
+===
+Summary (10 requests): EXPOSED: 4, AT_RISK: 2, UNKNOWN_ZDR: 1, CLEAR: 2, SKIPPED: 1
+Rotate secrets from these requests:
+  - req-1: minimax/minimax-m2 via novita on 2026-10-05 — Rotate any secret sent in these prompts; request deletion from MiniMax.
+  - req-2: deepseek/deepseek-v4-flash-0731 via phala on 2026-10-22 — Treat contents as exposed; rotate every included secret now.
+  - req-3: z-ai/glm-5.2 via together on 2026-07-04 — Samples were MiniMax M2/M3, GLM-5.2, Kimi K2.6; rotate secrets in them.
+  - req-4: moonshotai/kimi-k2.6 via together on 2026-06-24 — Samples were MiniMax M2/M3, GLM-5.2, Kimi K2.6; rotate secrets in them.
+UNKNOWN_ZDR means OpenRouter has not published which 125
+endpoints lost ZDR — this tool cannot confirm them for you.

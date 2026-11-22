@@ -1,0 +1,10 @@
+{"id": "req-1", "model": "minimax/minimax-m2", "provider": "novita", "date": "2026-10-05"}
+{"id": "req-2", "model": "deepseek/deepseek-v4-flash-0731", "provider": "phala", "date": "2026-10-22"}
+{"id": "req-3", "model": "z-ai/glm-5.2", "provider": "together", "date": "2026-07-04"}
+{"id": "req-4", "model": "moonshotai/kimi-k2.6", "provider": "together", "date": "2026-06-24"}
+{"id": "req-5", "model": "minimax/minimax-m2", "provider": "novita", "date": "2026-11-15"}
+{"id": "req-6", "model": "minimax/minimax-m2", "provider": "novita", "date": "2026-05-27"}
+{"id": "req-7", "model": "openai/gpt-6.2-sol", "provider": "openai", "date": "2026-11-20"}
+{"id": "req-8", "model": "minimax/minimax-m2", "provider": "fireworks", "date": "2026-05-27"}
+{"id": "req-9", "model": "google/gemini-4-neon", "provider": "google", "date": "2026-11-22"}
+{this line is not valid JSON and is skipped, not fatal}
