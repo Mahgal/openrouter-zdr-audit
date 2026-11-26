@@ -2,7 +2,7 @@
 
 ![demo](demo.png)
 
-**OpenRouter just pulled 125 endpoints off Zero Data Retention — but it hasn't published which ones. This tool checks your own request log against the three incident windows that *are* public, and tells you exactly which prompts to treat as exposed, in 0.05 seconds.**
+**Check your OpenRouter JSONL request log against the three published incident windows and the 2026-11-22 ZDR removal date to see exactly which requests to treat as exposed — in 0.0502 s median (7 runs: 0.0491, 0.0493, 0.0641, 0.0473, 0.0502, 0.0516, 0.0515 s; measured 2026-11-26 in staging with `python3 openrouter_zdr_audit.py --demo --fail-on never`).**
 
 A stdlib-only Python CLI. No installs, no network calls, no API key — it reads only the JSONL file you hand it, and nothing leaves your machine.
 
@@ -30,7 +30,7 @@ Sources: [OpenRouter incident announcement, 2026-11-22](https://openrouter.ai/bl
 | | Before | After |
 |---|---|---|
 | What you know | "Something happened at OpenRouter — was I affected?" | `EXPOSED: 4` — req-1 to req-4, with the exact window and what to rotate |
-| Time to answer | Read three incident notices, cross-check your logs by hand | **0.047 s** median (7 runs, measured 2026-11-22 on this machine) |
+| Time to answer | Read three incident notices, cross-check your logs by hand | **0.0502 s** median (7 runs: 0.0491, 0.0493, 0.0641, 0.0473, 0.0502, 0.0516, 0.0515 s; measured 2026-11-26 in staging) |
 | False comfort | "My provider wasn't named, so I'm fine" | `UNKNOWN_ZDR` for post-2026-11-22 requests — the tool says what it cannot confirm |
 
 ## Quick start (30 seconds)
@@ -52,11 +52,11 @@ python3 openrouter_zdr_audit.py --demo --fail-on never  # report only, always ex
 
 No pip installs, no dependencies. Python 3.8+ only. Exit code 1 means the log contains `EXPOSED`, `AT_RISK`, or `UNKNOWN_ZDR` requests; 0 means every request is `CLEAR` (or skipped). Never paste an API key into a log file — this tool does not need one.
 
-Verified from a clean copy (fresh checkout in `/tmp`, 2026-11-22): `--demo` reproduces byte-for-byte, and the full test suite passes, 22/22, exit 0.
+Verified in staging (2026-11-26): `--demo` reproduces byte-for-byte (sha256 `a3342c2d05c62bd97d7432b612375305a793858103aaefd53e77e09aa22eeaad`, two runs identical), and the full test suite passes, 22/22, exit 0 (`python3 tests/run_tests.py`).
 
 ## Example output
 
-Real output of `python3 openrouter_zdr_audit.py --demo` (captured verbatim to `demo.txt`; re-runs reproduce it byte-for-byte, sha256 `a3342c2d05c62bd97d7432b612375305a793858103aaefd53e77e09aa22eeaad`):
+Real output of `python3 openrouter_zdr_audit.py --demo` (captured verbatim to `demo.txt`; the block below is byte-identical to `demo.txt`):
 
 ```
 OpenRouter ZDR audit — demo log examples/sample-log.jsonl
